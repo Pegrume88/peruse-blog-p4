@@ -8,7 +8,7 @@ STATUS = ((0, "Draft"), (1, "Published"))
 
 class Post(models.Model):
 
-    title = models.CharField(max_length=220, unique=True)
+    title = models.CharField(max_length=250, unique=True)
     slug = models.SlugField(max_length=220, unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="blog_posts")
     updated_on = models.DateTimeField(auto_now=True)
@@ -20,10 +20,10 @@ class Post(models.Model):
     likes = models.ManyToManyField(User, related_name='blog_likes', blank=True)
 
     class Meta:
-        ordering = ['-created_on']
+        ordering = ['created_on']
     
     def __str__(self):
-        return self.title
+        return self.title 
 
     def number_of_likes(self):
         return self.likes.count()
@@ -39,7 +39,7 @@ class Comment(models.Model):
     approved = models.BooleanField(default=True)
 
     class Meta:
-        ordering = ['-created_on']
+        ordering = ['created_on']
 
     def __str__(self):
         return f"comment{self.body} by {self.name}"
