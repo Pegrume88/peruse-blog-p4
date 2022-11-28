@@ -1,7 +1,40 @@
-<h1>Post</h1>
-<ul>
-{% for post in object_list %}
-<li>{{ post.title }} - {{ post.author }}</li><br/>
-{{ post.body }}</li>
-{% endfor %}
-</ul>
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+
+        <!--Blog entries-->
+        <div class="col-12 mt-3 left">
+            <div class="row">
+            {% for post in post_list %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="image-container">
+                                {% if "placeholder in post.featured_image.url %}
+                                <img class="rounded card-img-top" src="https://d4.alternativeto.net/Ee5NBb8-K7iSzYCcBx61KgWVwegKCcumloKbYuw4v0U/rs:fit:1200:1200:0/g:ce:0:0/YWJzOi8vZGlzdC9zL2ZpbGwtbXVycmF5XzI5NzA4NF9mdWxsLmpwZw.jpg">
+                                {% else %}
+                                <img class="rounded card-img-top" src=" {{ post.featured_image.url }}">
+                                {% endif %}
+                                <div class="image-flash">
+                                    <p class="author">Author: {{ post.author }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            {% if forloop.counter|divisibleby:3 %}
+            </div>
+            <div class="row">
+            {% end if %}
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{%endblock%}
