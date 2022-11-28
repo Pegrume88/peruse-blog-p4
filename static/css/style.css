@@ -1,0 +1,35 @@
+body {
+    background-color: whitesmoke;
+}
+
+.image-container {
+    position: relative;
+    border-radius: 25px;
+}
+
+.card {
+    border: 1px solid cornflowerblue;
+    border-radius: 25px;
+    background-color: transparent;
+}
+
+.author {
+    color: whitesmoke;
+    margin: 4px;
+    text-transform: uppercase;
+}
+
+.post-link {
+    text-decoration: none;
+    color: darkseagreen;
+}
+
+
+
+.image-text {
+    position: absolute;
+    bottom: 5%;
+    min-width: 30%;
+    left: -2px;
+    background-color: cornflowerblue;
+}
