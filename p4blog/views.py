@@ -9,6 +9,12 @@ class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by('created_on')
     template_name = 'index.html'
     paginate_by = 5
+    
+
+class AddPostView(generic.CreateView):
+    model = Post
+    template_name = 'add_post.html'
+    fields = '__all__'
 
 
 class PostDetail(View):
@@ -32,7 +38,7 @@ class PostDetail(View):
                 "comment_form": CommentForm()
             },
         )
-        
+
     def post(self, request, slug, *args, **kwargs):
         queryset = Post.objects.filter(status=1)
         post = get_object_or_404(queryset, slug=slug)
@@ -63,5 +69,7 @@ class PostDetail(View):
                 "comment_form": CommentForm()
             },
         )
+
+
 
 
