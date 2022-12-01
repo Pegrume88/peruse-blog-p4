@@ -4,7 +4,7 @@ body {
 }
 
 
-.form.form-group {
+form {
       display: flex;
       flex-direction: column;
       justify-content: center;
