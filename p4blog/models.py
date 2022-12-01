@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 from cloudinary.models import CloudinaryField
 
 
@@ -26,8 +27,8 @@ class Post(models.Model):
         return self.title 
     
     def get_absolute_url(self):
+        return reverse('home')
         
-
     def number_of_likes(self):
         return self.likes.count()
 
