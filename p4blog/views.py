@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic, View
 from .models import Post
-from .forms import CommentForm
+from .forms import CommentForm, PostForm
 
 
 class PostList(generic.ListView):
@@ -13,8 +13,9 @@ class PostList(generic.ListView):
 
 class AddPostView(generic.CreateView):
     model = Post
+    form_class = PostForm
     template_name = 'add_post.html'
-    fields = ('title', 'author', 'content', 'featured_image')
+    # fields = ('title', 'author', 'content', 'featured_image')
 
 
 class PostDetail(View):
