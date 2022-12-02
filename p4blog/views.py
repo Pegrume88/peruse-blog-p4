@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.views import generic, View
 from .models import Post
 from .forms import CommentForm, PostForm
+from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
+
 
 
 class PostList(generic.ListView):
@@ -15,13 +17,16 @@ class AddPostView(generic.CreateView):
     model = Post
     form_class = PostForm
     template_name = 'add_post.html'
+    summernote_fields = 'content'
     # fields = ('title', 'author', 'content', 'featured_image')
 
 
 class EditPostView(generic.UpdateView):
     model = Post
+    form_class = PostForm
     template_name = 'edit_post.html'
-    fields = ('title', 'content', 'featured_image')
+    # fields = ('title', 'content', 'featured_image')
+    summernote_fields = 'content'
 
 
 class PostDetail(View):
