@@ -18,6 +18,12 @@ class AddPostView(generic.CreateView):
     # fields = ('title', 'author', 'content', 'featured_image')
 
 
+class EditPostView(generic.UpdateView):
+    model = Post
+    template_name = 'edit_post.html'
+    fields = ('title', 'content', 'featured_image')
+
+
 class PostDetail(View):
 
     def get(self, request, slug, *args, **kwargs):

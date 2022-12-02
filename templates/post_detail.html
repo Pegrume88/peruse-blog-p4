@@ -9,6 +9,7 @@
                 <h1 class="post-title">
                 </h1>
                 <p>{{ post.author }} | {{ post.created_on }}</p>
+                <a href="{% url 'edit_post' post.slug %}">Edit Post!</a>
             </div>
             <div class="d-none d-md-block col-md-6 masthead-image">
                 {% if "placeholder" in post.featured_image.url %}
