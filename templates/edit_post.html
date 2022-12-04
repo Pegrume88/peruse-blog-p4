@@ -3,8 +3,9 @@
 
 {% block content %}
 
-<h1>Edit Post</h1>
 
+<h1>Edit Post</h1>
+{% if user.is_authenticated %}
 <br /><br />
 <div class="form">
     <div class="form-group">
@@ -16,5 +17,21 @@
         </form>
     </div>
 </div>
+{% else %}
+
+<div class="container">
+    <p>Only authorized useres are allowed to edit posts!</p><br/>
+    <p>Please Login or Register an account</p>
+</div>
+<div>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+    </li>
+</div>
+{% endif %}
+
 
 {% endblock %}

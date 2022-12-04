@@ -1,16 +1,23 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic, View
 from django.urls import reverse_lazy
+from django.contrib.auth.forms import UserCreationForm
 from .models import Post
 from .forms import CommentForm, PostForm
 from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
+
+
+class SignupView(generic.CreateView):
+    form_class = UserCreationForm
+    template_name = 'account/signup.html'
+    success_url = reverse_lazy('login')
 
 
 class PostList(generic.ListView):
     model = Post
     queryset = Post.objects.filter(status=1).order_by('-created_on')
     template_name = 'index.html'
-    paginate_by = 5
+    paginate_by = 6
     
 
 class AddPostView(generic.CreateView):

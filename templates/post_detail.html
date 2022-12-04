@@ -9,8 +9,10 @@
                 <h1 class="post-title">
                 </h1>
                 <p>{{ post.author }} | {{ post.created_on }}</p>
+                {% if user.is_authenticated %}
                 <a href="{% url 'edit_post' post.slug %}">Edit Post!</a>
                 <a href="{% url 'delete_post' post.slug %}">Delete Post!</a>
+                {% endif %}
             </div>
             <div class="d-none d-md-block col-md-6 masthead-image">
                 {% if "placeholder" in post.featured_image.url %}
