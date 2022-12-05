@@ -7,6 +7,16 @@ from cloudinary.models import CloudinaryField
 STATUS = ((0, "Draft"), (1, "Published"))
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.name 
+
+    def get_absolute_url(self):
+        return reverse('home')
+
+
 class Post(models.Model):
 
     title = models.CharField(max_length=250, unique=True)
@@ -14,6 +24,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="p4blog_posts")
     updated_on = models.DateTimeField(auto_now=True)
     content = models.TextField()
+    category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.CASCADE)
     featured_image = CloudinaryField('image', default='placeholder')
     excerpt = models.TextField(blank=True)
     created_on = models.DateTimeField(auto_now_add=True)

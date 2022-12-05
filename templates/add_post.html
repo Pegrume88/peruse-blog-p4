@@ -4,6 +4,7 @@
 
 {% block content %}
 
+{% if user.is_authenticated %}
 <h1>Add blog post</h1>
 
 <br /><br />
@@ -17,5 +18,11 @@
         </form>
     </div>
 </div>
+
+{% else%}
+
+You must be logged in to use this feature!
+
+{% endif %}
 
 {% endblock %}
