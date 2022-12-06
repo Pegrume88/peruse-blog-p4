@@ -1,4 +1,5 @@
 from django.db import models
+from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from django.urls import reverse
 from cloudinary.models import CloudinaryField
@@ -20,7 +21,7 @@ class Category(models.Model):
 class Post(models.Model):
 
     title = models.CharField(max_length=250, unique=True)
-    slug = models.SlugField(max_length=220, unique=True)
+    slug = models.SlugField(max_length=220)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="p4blog_posts")
     updated_on = models.DateTimeField(auto_now=True)
     content = models.TextField()
@@ -33,13 +34,18 @@ class Post(models.Model):
 
     class Meta:
         ordering = ['-created_on']
-    
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        return super().save(*args, **kwargs)
+
     def __str__(self):
-        return self.title 
-    
+        return self.title
+
     def get_absolute_url(self):
         return reverse('home')
-        
+
     def number_of_likes(self):
         return self.likes.count()
 
