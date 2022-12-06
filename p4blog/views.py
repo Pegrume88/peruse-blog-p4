@@ -48,6 +48,18 @@ class AddCategoryView(generic.CreateView):
     fields = '__all__'
 
 
+#lass CategoryView(View):
+    # model = Post
+    # template_name = 'category_view.html'
+    # fields = ('title', 'content', 'category',)
+
+
+# def CategoryView(request, cat):
+    # category_posts = Post.objects.filter(category=cat)
+     # return render(request, category_view.html)
+    
+
+
 class PostDetail(View):
 
     def get(self, request, slug, *args, **kwargs):

@@ -22,8 +22,13 @@
                             </div>
                             <a href="{% url 'post_detail' post.slug %}" class="post-link">
                                 <h2 class="post-title">{{ post.title }}</h2>
+                                <h2 class="post-title">{{ post.category }}</h2>
                                 <div class="image-flash">
-                                    <p class="author">By: {{ post.author }} - <a href="{% url 'edit_post' post.slug %}">Edit Post!</a></p>
+                                    <p class="author">By: {{ post.author }} </p>
+                                </div>
+                                <div>
+                                    <p><a href="{% url 'edit_post' post.slug %}">Edit Post!</a></p>
+                                    <p><a href="{% url 'delete_post' post.slug %}">Delete Post!</a></p>
                                 </div>
                                 <p class="post-text">{{ post.exerpt }}</p>
                             </a>
