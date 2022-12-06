@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views import generic, View
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
-from .models import Post
+from .models import Post, Category
 from .forms import CommentForm, PostForm
 from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 
@@ -40,6 +40,12 @@ class DeleteView(generic.DeleteView):
     model = Post
     template_name = 'delete_post.html'
     success_url = reverse_lazy('home')
+
+
+class AddCategoryView(generic.CreateView):
+    model = Category
+    template_name = 'add_category.html'
+    fields = '__all__'
 
 
 class PostDetail(View):
