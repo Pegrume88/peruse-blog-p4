@@ -39,12 +39,14 @@
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                           Categories
                         </a>
+                        
                         <ul class="dropdown-menu">
                             {% for item in category_menu %}
-                          <li><a class="dropdown-item" href="#">{{ item }}</a></li>
+                          <li><a class="dropdown-item" href="">{{ item }}</a></li>
                             
                             {% endfor %}
                         </ul>
+                       
                       </li>
                       
                     {% if user.is_authenticated %}
