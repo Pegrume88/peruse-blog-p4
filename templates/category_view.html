@@ -3,8 +3,30 @@
 {% block content %}
 
 
-<h1>hello</h1>
-                            
+
+<h1>{% url 'category'  %} </h1>
+
+<div>
+    
+    
+
+    
+
+    {% for category in category_list %}
+    <br/>
+    <br/>
+    <br/>
+    <div>
+        <h3 class="post-title">{{ category.name }}</h3>
+        
+    </div>
+    
+    {% endfor %}
+
+</div>
+
+
+
 
 
 

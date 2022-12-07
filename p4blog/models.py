@@ -6,7 +6,7 @@ from cloudinary.models import CloudinaryField
 
 
 STATUS = ((0, "Draft"), (1, "Published"))
-
+CATEGORY = "cat"
 
 class Category(models.Model):
     name = models.CharField(max_length=30)

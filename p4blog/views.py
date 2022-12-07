@@ -15,9 +15,18 @@ class SignupView(generic.CreateView):
 
 class PostList(generic.ListView):
     model = Post
-    queryset = Post.objects.filter(status=1).order_by('-created_on')
     template_name = 'index.html'
     paginate_by = 6
+
+
+class CategoryList(generic.ListView):
+    model = Category
+    template_name = 'category_view.html'
+    
+
+    
+
+    
 
 
 class AddPostView(generic.CreateView):
@@ -48,10 +57,6 @@ class AddCategoryView(generic.CreateView):
     fields = '__all__'
 
 
-class CategoryView(View):
-    model = Post
-    template_name = 'category_view.html'
-    fields = ('title', 'content', 'category',)
 
 
 #def CategoryView(request, cat):

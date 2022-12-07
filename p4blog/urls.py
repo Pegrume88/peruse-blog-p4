@@ -1,4 +1,4 @@
-from . import views
+from .import views
 from django.urls import path
 
 
@@ -10,5 +10,5 @@ urlpatterns = [
     path('edit_post/<slug:slug>', views.EditPostView.as_view(), name='edit_post'),
     path('delete_post/<slug:slug>/remove', views.DeleteView.as_view(), name='delete_post'),
     path('signup/', views.SignupView.as_view(), name='signup'),
-    path('category_view/', views.CategoryView, name='category'),
+    path('category_view/', views.CategoryList.as_view(), name='category'),
 ]
