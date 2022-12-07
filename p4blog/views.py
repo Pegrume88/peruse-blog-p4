@@ -18,6 +18,14 @@ class PostList(generic.ListView):
     template_name = 'index.html'
     paginate_by = 6
 
+    def get_context_data(self, *args, **kwargs):
+        category_menu = Category.objects.all()
+        context = super(PostList, self).get_context_data(*args, **kwargs)
+        context["category_menu"] = category_menu
+        return context
+
+    
+
 
 class CategoryList(generic.ListView):
     model = Category
@@ -67,6 +75,8 @@ class AddCategoryView(generic.CreateView):
 
 
 class PostDetail(View):
+
+    
 
     def get(self, request, slug, *args, **kwargs):
         queryset = Post.objects.filter(status=1)
