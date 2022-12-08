@@ -28,8 +28,12 @@
                                     <p class="author">By: {{ post.author }} </p>
                                 </div>
                                 <div>
-                                    <p><a href="{% url 'edit_post' post.slug %}">Edit Post!</a></p>
-                                    <p><a href="{% url 'delete_post' post.slug %}">Delete Post!</a></p>
+                                    {% if user is authenticated %}
+                                        {% if user.id == post.author.id %}
+                                        <a href="{% url 'edit_post' post.slug %}">Edit Post!</a>
+                                        <a href="{% url 'delete_post' post.slug %}">Delete Post!</a>
+                                        {% endif %}
+                                    {% endif %}
                                 </div>
                                 <p class="post-text">{{ post.exerpt }}</p>
                             </a>
