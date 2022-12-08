@@ -4,8 +4,9 @@ from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 from .models import Post, Category
-from .forms import CommentForm, PostForm
+from .forms import CommentForm, PostForm, SignUpForm
 from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
+
 
 class PostLike(View):
     
@@ -19,9 +20,10 @@ class PostLike(View):
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
-class SignupView(generic.CreateView):
-    form_class = UserCreationForm
+class SignUpForm(generic.CreateView):
+    form_class = SignUpForm
     template_name = 'account/signup.html'
+    fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
     success_url = reverse_lazy('login')
 
 
