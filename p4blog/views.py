@@ -1,10 +1,22 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic, View
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
+from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 from .models import Post, Category
 from .forms import CommentForm, PostForm
 from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
+
+class PostLike(View):
+    
+    def post(self, request, slug, *args, **kwargs):
+        post = get_object_or_404(Post, slug=slug)
+        if post.likes.filter(id=request.user.id).exists():
+            post.likes.remove(request.user)
+        else:
+            post.likes.add(request.user)
+
+        return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
 class SignupView(generic.CreateView):
@@ -24,17 +36,10 @@ class PostList(generic.ListView):
         context["category_menu"] = category_menu
         return context
 
-    
-
 
 class CategoryList(generic.ListView):
     model = Category
     template_name = 'category_view.html'
-    
-
-    
-
-    
 
 
 class AddPostView(generic.CreateView):
@@ -73,7 +78,6 @@ class AddCategoryView(generic.CreateView):
     #return render(request, 'category_view.html', {'cat': cat})
     
 
-
 class PostDetail(View):
 
     
@@ -82,9 +86,9 @@ class PostDetail(View):
         queryset = Post.objects.filter(status=1)
         post = get_object_or_404(queryset, slug=slug)
         comments = post.comments.filter(approved=True).order_by("-created_on")
-        liked = False
+        liked = True
         if post.likes.filter(id=self.request.user.id).exists():
-            liked = True
+            liked = False
 
         return render(
             request,
