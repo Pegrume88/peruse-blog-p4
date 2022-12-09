@@ -6,6 +6,8 @@ body {
 body {
     text-align: center;
 }
-form {
-    display: inline-block;
+
+.form-group {
+    align-content: center;
+    
 }

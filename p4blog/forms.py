@@ -5,14 +5,21 @@ from django import forms
 from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 
 
-class SignUpForm(UserCreationForm):
-    email = forms.EmailField()
-    first_name = forms.CharField()
-    last_name = forms.CharField()
+class NewSignUpForm(UserCreationForm):
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
+        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password1')
+
+    def __init__(self, *args, **kwargs):
+        super(NewSignUpForm, self).__init__(*args, **kwargs)
+
+        self.fields['username'].widget.attrs['class'] = 'form-control'
+        self.fields['email'].widget.attrs['class'] = 'form-control'
+        self.fields['password1'].widget.attrs['class'] = 'form-control'
+        self.fields['password1'].widget.attrs['class'] = 'form-control'
 
 
 class CommentForm(forms.ModelForm):
@@ -31,7 +38,6 @@ class PostForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'author': forms.TextInput(attrs={'class': 'form-control', 'value': '', 'id': 'user', 'type': 'hidden'}),
-            # 'author': forms.Select(attrs={'class': 'form-control'}),
             'category': forms.Select(attrs={'class': 'form-control'}),
             'content': forms.Textarea(attrs={'class': 'form-control'}),
             'featured_image': forms.FileInput(attrs={'class': 'form-control-file'}),

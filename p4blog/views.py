@@ -2,9 +2,9 @@ from django.shortcuts import render, get_object_or_404
 from django.views import generic, View
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import Post, Category
-from .forms import CommentForm, PostForm, SignUpForm
+from .forms import CommentForm, PostForm, NewSignUpForm
 from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 
 
@@ -21,10 +21,19 @@ class PostLike(View):
 
 
 class SignUpForm(generic.CreateView):
-    form_class = SignUpForm
+    form_class = NewSignUpForm
     template_name = 'account/signup.html'
-    fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
     success_url = reverse_lazy('login')
+
+
+class EditProfileView(generic.UpdateView):
+    form_class = UserChangeForm
+    template_name = 'edit_profile.html'
+    success_url = reverse_lazy('home')
+
+    def get_object(self):
+        return self.request.user
+
 
 
 class PostList(generic.ListView):
