@@ -2,5 +2,46 @@
 
 {% block content %}
 
+<h1> {{ cats }} Categories!</h1>
+
+
+
+<div class="container-fluid">
+
+    <div class="row">
+
+        <!--post by category-->
+        <div class="col-12 mt-3 left">
+            <div class="row">
+                {% for post in category_posts %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            
+                            <a href="{% url 'post_detail' post.slug %}" class="post-link">
+                                <h2 class="post-title">{{ post.title }}</h2>
+                                <h2 class="post-title"><a href="">{{ post.category }}</a>
+                                </h2>
+                                <div class="image-flash">
+                                    <p class="author">By: {{ post.author }} </p>
+                                </div>
+
+                            </a>
+                            <hr/>
+                            <p class="card-text text-muted h6">{{ post.created_on }}
+                                <i class="far fa-heart"></i>{{ post.number_of_likes }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>   
+        </div>   
+    </div> 
+
+
+</div>
+
+
 
 {% endblock %}

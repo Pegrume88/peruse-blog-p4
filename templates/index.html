@@ -22,7 +22,7 @@
                             </div>
                             <a href="{% url 'post_detail' post.slug %}" class="post-link">
                                 <h2 class="post-title">{{ post.title }}</h2>
-                                <h2 class="post-title"><a href="">{{ post.category }}</a>
+                                <h2 class="post-title"><a href="{% url 'category_view' post.category.pk %}">{{ post.category }}</a>
                                 </h2>
                                 <div class="image-flash">
                                     <p class="author">By: {{ post.author }} </p>

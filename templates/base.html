@@ -1,4 +1,5 @@
 {% load static %}
+{% load menu %}
 
 <!DOCTYPE html>
 <html class="h-100">
@@ -41,8 +42,9 @@
                         </a>
                         
                         <ul class="dropdown-menu">
-                            {% for item in category_menu %}
-                          <li><a class="dropdown-item" href="">{{ item }}</a></li>
+                            {% categories as category_list %}
+                            {% for item in category_list %}
+                          <li><a class="dropdown-item" href="{% url 'category_view' item.pk %}">{{ item }}</a></li>
                             
                             {% endfor %}
                         </ul>

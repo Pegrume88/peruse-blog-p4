@@ -2,9 +2,10 @@ from django.shortcuts import render, get_object_or_404
 from django.views import generic, View
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
+from django.contrib.auth.views import PasswordChangeView
 from .models import Post, Category
-from .forms import CommentForm, PostForm, NewSignUpForm
+from .forms import CommentForm, PostForm, NewSignUpForm, EditProfileForm, ChangePasswordForm
 from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 
 
@@ -27,13 +28,17 @@ class SignUpForm(generic.CreateView):
 
 
 class EditProfileView(generic.UpdateView):
-    form_class = UserChangeForm
+    form_class = EditProfileForm
     template_name = 'edit_profile.html'
     success_url = reverse_lazy('home')
 
     def get_object(self):
         return self.request.user
 
+
+class ChangePasswordView(PasswordChangeView):
+    form_class = ChangePasswordForm
+    success_url = reverse_lazy('home')
 
 
 class PostList(generic.ListView):
@@ -45,12 +50,9 @@ class PostList(generic.ListView):
         category_menu = Category.objects.all()
         context = super(PostList, self).get_context_data(*args, **kwargs)
         context["category_menu"] = category_menu
+        
         return context
 
-
-class CategoryList(generic.ListView):
-    model = Category
-    template_name = 'category_view.html'
 
 
 class AddPostView(generic.CreateView):
@@ -81,17 +83,20 @@ class AddCategoryView(generic.CreateView):
     fields = '__all__'
 
 
+def CategoryView(request, id):
+    category_menu = Category.objects.all()
 
-
-#def CategoryView(request, cat):
-
-    #category_view = Post.objects.filter(category=cat)
-    #return render(request, 'category_view.html', {'cat': cat})
+    category_posts = Post.objects.filter(category__pk=id)
+    if len(category_posts) > 0:
+        category_name = category_posts[0].category.name
+    else:
+        category_name = ''
+   
+    return render(request, 'category_view.html', {'cats':category_name, 'category_posts':category_posts, 'category_menu':category_menu})
     
 
 class PostDetail(View):
 
-    
 
     def get(self, request, slug, *args, **kwargs):
         queryset = Post.objects.filter(status=1)
