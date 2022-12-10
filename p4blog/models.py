@@ -66,4 +66,13 @@ class Comment(models.Model):
     def __str__(self):
         return f"comment{self.body} by {self.name}"
 
+    
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    bio = models.TextField()
+    profile_image = CloudinaryField('image', default='placeholder')
+
+    def __str__(self):
+        return str(self.user)
+
 
