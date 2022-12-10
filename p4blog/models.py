@@ -67,10 +67,13 @@ class Comment(models.Model):
         return f"comment{self.body} by {self.name}"
 
     
-class UserProfile(models.Model):
+class Profile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     bio = models.TextField()
-    profile_image = CloudinaryField('image', default='placeholder')
+    profile_image = CloudinaryField('image', default='placeholder', null=True, blank=True)
+    facebook_url = models.CharField(max_length=250, null=True, blank=True)
+    instagram_url = models.CharField(max_length=250, null=True, blank=True)
+    twitter_url = models.CharField(max_length=250, null=True, blank=True)
 
     def __str__(self):
         return str(self.user)

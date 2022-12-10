@@ -4,7 +4,7 @@ from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib.auth.views import PasswordChangeView
-from .models import Post, Category
+from .models import Post, Category, Profile
 from .forms import CommentForm, PostForm, NewSignUpForm, EditProfileForm, ChangePasswordForm
 from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 
