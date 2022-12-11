@@ -1,38 +1,66 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 {% block content %}
+{% load static %}
 
 {% load crispy_forms_tags %}
 
-<div >
+<div>
     <div class="container">
         <div class="row g-0">
             <div class="col-md-6">
-                <h1 class="post-title">{{ post.title }} 
+                <h1 class="post-title">{{ post.title }}
                 </h1>
                 <p>{{ post.author }} | {{ post.created_on }}
                     <br><br>
-                    <img src="{{ post.author.profile.profile_image.url }}" alt="placeholder" class="rounded-circle">
+            
                 </p>
+                {% if user.is_authenticated %}
                 <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="https://d4.alternativeto.net/Ee5NBb8-K7iSzYCcBx61KgWVwegKCcumloKbYuw4v0U/rs:fit:1200:1200:0/g:ce:0:0/YWJzOi8vZGlzdC9zL2ZpbGwtbXVycmF5XzI5NzA4NF9mdWxsLmpwZw.jpg" alt="Card image cap">
+                    {% if user.profile.profile_image %}
+                    <img class="card-img-top" src=" {{ user.profile.profile_image.url }}">
+                    
+                    {% else%}
+                    <img class="card-img-top" src=" {% static 'image/default_profile_pic.png' %}">
+                    {% endif %}
                     <div class="card-body">
-                      <h5 class="card-title">{{ post.author }}</h5>
-                      <p class="card-text">{{ user.profile.bio }}</p>
-                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <h5 class="card-title">{{ post.author }}</h5>
+                        <p class="card-text">{{ user.profile.bio }}</p>
+                        <p class="small text-muted">
+                            
+                            <a href="{% url 'user_profile' user.profile.id %}">User Profile </a> |
+
+
+                            {% if user.profile.facebook_url %}
+                            <a href="{{ user.profile.facebook_url }}">Facebook</a> |
+                            {% endif %}
+
+                            {% if user.profile.instagram_url %}
+                            <a href="{{ user.profile.instagram_url }}">Instagram</a> |
+                            {% endif %}
+
+                            {% if user.profile.twitter_url %}
+                            <a href="{{ user.profile.twitter_url }}">Twitter</a>
+                            {% endif %}
+
+
+                        </p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
                 </div>
-                
-                
+                {% endif %}
+
+
                 {% if user.is_authenticated %}
-                    {% if user.id == post.author.id %}
-                        <a href="{% url 'edit_post' post.slug %}">Edit Post!</a>
-                        <a href="{% url 'delete_post' post.slug %}">Delete Post!</a>
-                    {% endif %}
+                {% if user.id == post.author.id %}
+                <a href="{% url 'edit_post' post.slug %}">Edit Post!</a>
+                <a href="{% url 'delete_post' post.slug %}">Delete Post!</a>
+                {% endif %}
                 {% endif %}
             </div>
             <div class="d-none d-md-block col-md-6 masthead-image">
                 {% if "placeholder" in post.featured_image.url %}
-                <img src="https://d4.alternativeto.net/Ee5NBb8-K7iSzYCcBx61KgWVwegKCcumloKbYuw4v0U/rs:fit:1200:1200:0/g:ce:0:0/YWJzOi8vZGlzdC9zL2ZpbGwtbXVycmF5XzI5NzA4NF9mdWxsLmpwZw.jpg" width="100%">
+                <img src="https://d4.alternativeto.net/Ee5NBb8-K7iSzYCcBx61KgWVwegKCcumloKbYuw4v0U/rs:fit:1200:1200:0/g:ce:0:0/YWJzOi8vZGlzdC9zL2ZpbGwtbXVycmF5XzI5NzA4NF9mdWxsLmpwZw.jpg"
+                    width="100%">
                 {% else %}
                 <img src="" width="100%">
                 {% endif %}
@@ -47,7 +75,7 @@
             <div class="card-body">
                 <p class="card-text ">
                     {{ post.content | safe }}
-                    
+
                 </p>
                 <div class="row">
 
@@ -57,15 +85,17 @@
                             <form class="d-inline" action="{% url 'post_like' post.slug %}" method="POST">
                                 {% csrf_token %}
                                 {% if liked %}
-                                <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-like"><i class="fas fa-heart"></i></button>
+                                <button type="submit" name="blogpost_id" value="{{post.slug}}" class=""><i
+                                        class="fa-solid fa-heart btn-like"></i></button>
                                 {% else %}
-                                <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-like"><i class="far fa-heart"></i></button>
+                                <button type="submit" name="blogpost_id" value="{{post.slug}}" class=""><i
+                                        class="fa-regular fa-heart btn-like"></i></button>
                                 {% endif %}
                             </form>
                             {% else %}
                             <span class="text-secondary"><i class="far fa-heart"></i></span>
                             {% endif %}
-                        <span class="text-secondary">{{ post.number_of_likes }} </span>
+                            <span class="text-secondary">{{ post.number_of_likes }} </span>
                         </strong>
                     </div>
                     <div class="col-1">
@@ -96,7 +126,7 @@
                             {{ comment.created_on }}
                         </span> wrote:
                     </p>
-                    
+
                     {{ comment.body | linebreaks }}
                 </div>
                 {% endfor %}
@@ -104,7 +134,7 @@
         </div>
         <div class="col-md-4 card mb-4  mt-3 ">
             <div class="card-body">
-                
+
                 <!--comment box only appears if user is authenticated-->
                 {% if user.is_authenticated %}
 
@@ -116,7 +146,7 @@
                     <button type="submit" class="btn btn-signup btn-lg">Submit</button>
                 </form>
                 {% endif %}
-                
+
             </div>
         </div>
     </div>

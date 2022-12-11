@@ -9,6 +9,27 @@ from .forms import CommentForm, PostForm, NewSignUpForm, EditProfileForm, Change
 from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 
 
+class ProfilePageView(generic.DetailView):
+    model = Profile
+    template_name = 'user_profile.html'
+
+    def get_context_data(self, *args, **kwargs):
+        users = Profile.objects.all()
+        context = super(ProfilePageView, self).get_context_data(*args, **kwargs)
+
+        users_page = get_object_or_404(Profile, id=self.kwargs['pk'])
+        context["users_page"] = users_page
+        return context
+
+
+class EditProfilePageView(generic.UpdateView):
+    model = Profile
+    template_name = 'edit_user_profile_page.html'
+    fields = ['bio', 'profile_image', 'facebook_url', 'instagram_url', 'twitter_url']
+    success_url = reverse_lazy('home')
+
+
+
 class PostLike(View):
     
     def post(self, request, slug, *args, **kwargs):

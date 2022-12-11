@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+
+
+<h1>User Profile...</h1>
+{{ users_page }}
+<div class="card" style="width: 18rem;">
+    {% if users_page.profile_image %}
+    <img class="card-img-top" src=" {{ users_page.profile_image.url }}">
+    
+    {% else%}
+    <img class="card-img-top" src=" {% static 'image/default_profile_pic.png' %}">
+    {% endif %}
+    <div class="card-body">
+        <h5 class="card-title">{{ users_page.user }}</h5>
+        <p class="card-text">{{ users_page.bio }}</p>
+        <p class="small text-muted">
+            
+
+
+            {% if users_page.facebook_url %}
+            <a href="{{ users_page.facebook_url }}">Facebook</a> |
+            {% endif %}
+
+            {% if users_page.instagram_url %}
+            <a href="{{ users_page.instagram_url }}">Instagram</a> |
+            {% endif %}
+
+            {% if users_page.twitter_url %}
+            <a href="{{ users_page.twitter_url }}">Twitter</a>
+            {% endif %}
+
+
+        </p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+</div>
+
+{% endblock content %}

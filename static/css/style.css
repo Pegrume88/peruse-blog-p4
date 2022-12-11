@@ -1,13 +1,16 @@
 
 body {
-    background-color: antiquewhite;
+    background-color: whitesmoke;
 }
 
-body {
-    text-align: center;
-}
+
 
 .form-group {
     align-content: center;
     
+}
+
+button.btn-like {
+    border: none;
+    color: green;
 }
