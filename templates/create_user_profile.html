@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+    <h1>Create your Profile</h1>
+
+    <br /><br />
+    <div class="form">
+        <div class="form-group">
+            <form method="POST">
+
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button>Create Profile</button>
+            </form>
+        </div>
+    </div>
+
+
+
+
+    {% else%}
+    You must be logged in to use this feature!
+
+{% endif %}
+
+{% endblock %}

@@ -16,5 +16,6 @@ urlpatterns = [
     path('like/<slug:slug>/', views.PostLike.as_view(), name='post_like'),
     path('profile/<int:pk>/', views.ProfilePageView.as_view(), name='user_profile'),
     path('edit_user_profile/<int:pk>/', views.EditProfilePageView.as_view(), name='edit_user_profile'),
+    path('create_user_profile/', views.CreateProfileView.as_view(), name='create_user_profile'),
 
 ]

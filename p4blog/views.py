@@ -5,8 +5,19 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib.auth.views import PasswordChangeView
 from .models import Post, Category, Profile
-from .forms import CommentForm, PostForm, NewSignUpForm, EditProfileForm, ChangePasswordForm
+from .forms import CommentForm, PostForm, NewSignUpForm, EditProfileForm, ChangePasswordForm, ProfileForm
 from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
+
+
+class CreateProfileView(generic.CreateView):
+    model = Profile
+    form_class = ProfileForm
+    #fields = '__all__'
+    template_name = 'create_user_profile.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 class ProfilePageView(generic.DetailView):

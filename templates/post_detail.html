@@ -4,6 +4,7 @@
 
 {% load crispy_forms_tags %}
 
+
 <div>
     <div class="container">
         <div class="row g-0">
@@ -12,43 +13,11 @@
                 </h1>
                 <p>{{ post.author }} | {{ post.created_on }}
                     <br><br>
-            
+                    
                 </p>
                 {% if user.is_authenticated %}
-                <div class="card" style="width: 18rem;">
-                    {% if user.profile.profile_image %}
-                    <img class="card-img-top" src=" {{ user.profile.profile_image.url }}">
-                    
-                    {% else%}
-                    <img class="card-img-top" src=" {% static 'image/default_profile_pic.png' %}">
-                    {% endif %}
-                    <div class="card-body">
-                        <h5 class="card-title">{{ post.author }}</h5>
-                        <p class="card-text">{{ user.profile.bio }}</p>
-                        <p class="small text-muted">
-                            
-                            <a href="{% url 'user_profile' user.profile.id %}">User Profile </a> |
-
-
-                            {% if user.profile.facebook_url %}
-                            <a href="{{ user.profile.facebook_url }}">Facebook</a> |
-                            {% endif %}
-
-                            {% if user.profile.instagram_url %}
-                            <a href="{{ user.profile.instagram_url }}">Instagram</a> |
-                            {% endif %}
-
-                            {% if user.profile.twitter_url %}
-                            <a href="{{ user.profile.twitter_url }}">Twitter</a>
-                            {% endif %}
-
-
-                        </p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
+                    <a href="{% url 'user_profile' user.profile.id %}">User Profile </a> |
                 {% endif %}
-
 
                 {% if user.is_authenticated %}
                 {% if user.id == post.author.id %}

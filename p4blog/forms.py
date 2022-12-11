@@ -1,4 +1,4 @@
-from .models import Comment, Post, Category
+from .models import Comment, Post, Category, Profile
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib.auth.models import User
 from django import forms
@@ -22,6 +22,22 @@ class NewSignUpForm(UserCreationForm):
         self.fields['email'].widget.attrs['class'] = 'form-control'
         self.fields['password1'].widget.attrs['class'] = 'form-control'
         self.fields['password2'].widget.attrs['class'] = 'form-control'
+
+
+class ProfileForm(forms.ModelForm):
+    
+    class Meta:
+
+        model = Profile
+        fields = ('bio', 'profile_image', 'facebook_url', 'instagram_url', 'twitter_url')
+        widgets = {
+            'facebook_url': forms.TextInput(attrs={'class': 'form-control'}),
+            'instagram_url': forms.TextInput(attrs={'class': 'form-control'}),
+            'twitter_url': forms.TextInput(attrs={'class': 'form-control'}),
+            'bio': forms.Textarea(attrs={'class': 'form-control'}),
+            'profile_image': forms.FileInput(attrs={'class': 'form-control-file'}),
+
+        }
 
 
 class EditProfileForm(UserChangeForm):
