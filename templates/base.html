@@ -74,17 +74,18 @@
                         </a>
 
                         <ul class="dropdown-menu">
-                            {% if user.profile.id %}
+                            
 
-                            <li> <a class="nav-link" href="{% url 'edit_profile' %}"> Change Settings</a>
+                            <li> 
+                                <a class="nav-link" href="{% url 'edit_profile' %}"> Change Settings</a>
                             </li>
 
                             <li>
-
+                                {% if user.profile.id %}
                                 <a class="nav-link" href="{% url 'user_profile' user.profile.id %}">View Profile</a>
-                                {% else %}
+                                
 
-                                <a class="nav-link" href="{% url 'create_user_profile' %}">Create Profile</a>
+                                <a class="nav-link" href="{% url 'create_user_profile' %}">Edit Profile</a>
                             </li>
 
                             {% endif %}
@@ -96,7 +97,7 @@
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'signup' %}">Register</a>
+                        <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'account_login' %}">Login</a>

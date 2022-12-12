@@ -15,12 +15,13 @@
                     <br><br>
                     
                 </p>
-                {% if user.is_authenticated %}
-                    <a href="{% url 'user_profile' user.profile.id %}">User Profile </a> |
-                {% endif %}
-
+               
+                <a href="{% url 'user_profile' post.author.profile.id %}">User Profile </a> |
+                
                 {% if user.is_authenticated %}
                 {% if user.id == post.author.id %}
+                <a href="{% url 'user_profile' post.author.profile.id %}">User Profile </a> |
+
                 <a href="{% url 'edit_post' post.slug %}">Edit Post!</a>
                 <a href="{% url 'delete_post' post.slug %}">Delete Post!</a>
                 {% endif %}
@@ -51,18 +52,18 @@
                     <div class="col-1">
                         <strong>
                             {% if user.is_authenticated %}
-                            <form class="d-inline" action="{% url 'post_like' post.slug %}" method="POST">
-                                {% csrf_token %}
-                                {% if liked %}
-                                <button type="submit" name="blogpost_id" value="{{post.slug}}" class=""><i
-                                        class="fa-solid fa-heart btn-like"></i></button>
-                                {% else %}
-                                <button type="submit" name="blogpost_id" value="{{post.slug}}" class=""><i
-                                        class="fa-regular fa-heart btn-like"></i></button>
-                                {% endif %}
-                            </form>
-                            {% else %}
-                            <span class="text-secondary"><i class="far fa-heart"></i></span>
+                                <form class="d-inline" action="{% url 'post_like' post.slug %}" method="POST">
+                                    {% csrf_token %}
+                                    {% if liked %}
+                                    <button type="submit" name="blogpost_id" value="{{post.slug}}" class=""><i
+                                            class="fa-solid fa-heart btn-like"></i></button>
+                                    {% else %}
+                                    <button type="submit" name="blogpost_id" value="{{post.slug}}" class=""><i
+                                            class="fa-regular fa-heart btn-like"></i></button>
+                                    {% endif %}
+                                </form>
+                            
+                                <span class="text-secondary"><i class="far fa-heart"></i></span>
                             {% endif %}
                             <span class="text-secondary">{{ post.number_of_likes }} </span>
                         </strong>

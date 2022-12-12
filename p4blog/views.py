@@ -12,8 +12,8 @@ from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 class CreateProfileView(generic.CreateView):
     model = Profile
     form_class = ProfileForm
-    #fields = '__all__'
     template_name = 'create_user_profile.html'
+    success_url = reverse_lazy('home')
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -53,10 +53,6 @@ class PostLike(View):
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
-class SignUpForm(generic.CreateView):
-    form_class = NewSignUpForm
-    template_name = 'account/signup.html'
-    success_url = reverse_lazy('login')
 
 
 class EditProfileView(generic.UpdateView):

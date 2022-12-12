@@ -9,6 +9,4 @@ urlpatterns = [
     path('summernote/', include('django_summernote.urls')),
     path('', include('p4blog.urls'), name='p4blog_urls'),
     path('accounts/', include('allauth.urls')),
-
-
  ]

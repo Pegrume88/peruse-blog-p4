@@ -4,6 +4,14 @@ import dj_database_url
 if os.path.isfile('env.py'):
     import env
 
+
+ACCOUNT_FORMS = {
+    'signup': 'p4blog.forms.NewSignUpForm'
+}
+
+
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
@@ -47,6 +55,7 @@ SITE_ID = 1
 # rederiect to home page after login and logout
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
 
 # crispy forms to use bootstrap
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

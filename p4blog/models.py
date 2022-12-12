@@ -1,14 +1,16 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 from django.urls import reverse
+
 from cloudinary.models import CloudinaryField
 
 
 STATUS = ((0, "Draft"), (1, "Published"))
-CATEGORY = "cats"
+#CATEGORY = "cats"
 
-
+# category model
 class Category(models.Model):
     name = models.CharField(max_length=30)
 
@@ -18,7 +20,7 @@ class Category(models.Model):
     def get_absolute_url(self):
         return reverse('home')
 
-
+# Blog post Model
 class Post(models.Model):
 
     title = models.CharField(max_length=250, unique=True)
@@ -50,7 +52,7 @@ class Post(models.Model):
     def number_of_likes(self):
         return self.likes.count()
 
-
+# comment section model
 class Comment(models.Model):
 
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
@@ -66,7 +68,7 @@ class Comment(models.Model):
     def __str__(self):
         return f"comment{self.body} by {self.name}"
 
-    
+# Profile page model 
 class Profile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     bio = models.TextField()
@@ -75,7 +77,18 @@ class Profile(models.Model):
     instagram_url = models.CharField(max_length=250, null=True, blank=True)
     twitter_url = models.CharField(max_length=250, null=True, blank=True)
 
+   
     def __str__(self):
         return str(self.user)
+    
+    def get_absolute_url(self):
+        return reverse('home')
 
 
+# creates user profile when user registers 
+def create_profile(instance, created, **kwargs): 
+    if created: 
+        Profile.objects.create(user=instance) 
+
+
+post_save.connect(create_profile, sender=User)
