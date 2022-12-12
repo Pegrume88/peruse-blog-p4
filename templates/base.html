@@ -25,17 +25,23 @@
     <!-- Navigation -->
 
     <nav class="navbar navbar-expand-lg navbar-light bg-white right">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <h1><a class="nav-link active" aria-current="page" href="{% url 'home' %}"> <span class="page-logo">Peruse</span></a></h1>
+            </li>
+        </ul>
         <div class="container-fluid">
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
                 aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            
+            
+            
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
-                    </li>
+
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -67,34 +73,7 @@
                         <a class="nav-link" href="{% url 'add_category' %}">Add Category</a>
                     </li>
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Profile
-                        </a>
 
-                        <ul class="dropdown-menu">
-                            
-
-                            <li> 
-                                <a class="nav-link" href="{% url 'edit_profile' %}"> Change Settings</a>
-                            </li>
-
-                            <li>
-                                {% if user.profile.id %}
-                                <a class="nav-link" href="{% url 'user_profile' user.profile.id %}">View Profile</a>
-                                
-
-                                <a class="nav-link" href="{% url 'create_user_profile' %}">Edit Profile</a>
-                            </li>
-
-                            {% endif %}
-
-
-
-                        </ul>
-
-                    </li>
                     {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
@@ -103,10 +82,44 @@
                         <a class="nav-link" href="{% url 'account_login' %}">Login</a>
                     </li>
 
+
                     {% endif %}
                 </ul>
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropleft" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                               {{ user }} Profile
+                            </a>
 
+                            <ul class="dropdown-menu">
+
+
+                                <li>
+                                    <a class="nav-link" href="{% url 'edit_profile' %}"> Change Settings</a>
+                                </li>
+
+                                <li>
+                                    {% if user.profile.id %}
+                                    <a class="nav-link" href="{% url 'user_profile' user.profile.id %}">View Profile</a>
+
+
+                                    <a class="nav-link" href="{% url 'create_user_profile' %}">Edit Profile</a>
+                                    {% endif %}
+                                </li>
+
+                                
+
+                            </ul>
+
+                        </li>
+                    </ul>
+
+
+
+                </ul>
             </div>
+        </div>
         </div>
     </nav>
     <!--Page content-->

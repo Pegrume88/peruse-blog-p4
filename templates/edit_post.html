@@ -3,35 +3,36 @@
 
 {% block content %}
 
+<div class="container-fluid me-auto mb-2 mb-lg-0">
+    <h1>Edit Post</h1>
+    {% if user.is_authenticated %}
+        {% if user.id == post.author.id %}
+            <br /><br />
+            <div class="form">
+                <div class="form-group">
+                    <form method="POST">
 
-<h1>Edit Post</h1>
-{% if user.is_authenticated %}
-    {% if user.id == post.author.id %}
-        <br /><br />
-        <div class="form">
-            <div class="form-group">
-                <form method="POST">
-
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button class="btn btn-secondary" type="submit">Update!</button>
-                </form>
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button class="btn btn-secondary" type="submit">Update!</button>
+                    </form>
+                </div>
             </div>
-        </div>
-    {% endif %}
-{% else %}
+        {% endif %}
+    {% else %}
 
-<div class="container">
-    <p>Only authorized useres are allowed to edit posts!</p><br/>
-    <p>Please Login or Register an account</p>
-</div>
-<div>
-    <li class="nav-item">
-        <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{% url 'account_login' %}">Login</a>
-    </li>
+    <div class="container">
+        <p>Only authorized useres are allowed to edit posts!</p><br/>
+        <p>Please Login or Register an account</p>
+    </div>
+    <div>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+        </li>
+    </div>
 </div>
 {% endif %}
 

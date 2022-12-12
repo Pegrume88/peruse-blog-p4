@@ -14,11 +14,10 @@
                         <div class="card-body">
                             <div class="image-container">
                                 {% if "placeholder" in post.featured_image.url %}
-                                <img class="card-img-top" src="https://d4.alternativeto.net/Ee5NBb8-K7iSzYCcBx61KgWVwegKCcumloKbYuw4v0U/rs:fit:1200:1200:0/g:ce:0:0/YWJzOi8vZGlzdC9zL2ZpbGwtbXVycmF5XzI5NzA4NF9mdWxsLmpwZw.jpg">
+                                <img src="https://images.pexels.com/photos/842548/pexels-photo-842548.jpeg?auto=compress&cs=tinysrgb&w=800" width="100%">
                                 {% else %}
-                                <img class="card-img-top" src=" {{ post.featured_image.url }}">
+                                <img src="{{ post.featured_image.url }}" width="100%">
                                 {% endif %}
-                                
                             </div>
                             <a href="{% url 'post_detail' post.slug %}" class="post-link">
                                 <h2 class="post-title">{{ post.title }}</h2>

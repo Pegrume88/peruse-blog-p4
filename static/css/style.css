@@ -1,16 +1,93 @@
 
 body {
-    background-color: whitesmoke;
+    background-color: rgb(230, 219, 199);
+    font-family: sans-serif;
 }
 
 
 
-.form-group {
-    align-content: center;
-    
-}
+
+
+
+
 
 button.btn-like {
     border: none;
     color: green;
+}
+
+.page-logo {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    
+    color: brown;
+}
+
+.card {
+    border: none;
+    
+}
+
+.image-container {
+    position: relative;
+}
+
+.author {
+    color: darkgray;
+    margin: 4px;
+    text-transform: uppercase;
+}
+a {
+    text-decoration: none;
+    text-decoration-color: darkslategrey;
+    color: darkslategrey;
+}
+
+.masthead {
+    margin-top: 10px;
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    height: 33vh;
+    width: 100%;
+}
+
+.masthead-image {
+    position: relative;
+    overflow: hidden;
+}
+
+
+
+.post-link {
+    text-decoration: none;
+    color: #445261;
+    margin-left: 5%;
+}
+
+.post-link:hover,
+.page-link {
+    color: #E84610;
+}
+
+.post-title {
+    color: cadetblue;
+    margin-top: 5%;
+    margin-left: 5%;
+}
+
+.post-subtitle {
+    margin-left: 5%;
+    color: #E84610;
+}
+
+.btn-signup {
+    background-color: #23BBBB;
+    color: #fff;
+}
+
+.btn-like:hover,
+.btn-like:active {
+    color: #E84610;
+    background: transparent;
+    border: none;
 }

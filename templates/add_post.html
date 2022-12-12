@@ -1,22 +1,23 @@
-
-{% extends "base.html" %} 
+{% extends "base.html" %}
 {% load static %}
 
 {% block content %}
+<div class="container-fluid">
+
+    <h1>Add blog post</h1>
 
 
-<h1>Add blog post</h1>
-{% if user.is_authenticated %}
+    {% if user.is_authenticated %}
     <br /><br />
-    <div class="form">
-        <div class="form-group">
-            <form method="POST">
+    <div class="form-group form">
 
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button>Post!</button>
-            </form>
-        </div>
+        <form method="POST">
+
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button>Post!</button>
+        </form>
+
     </div>
 
     <!--Js to automatically assign correct auther to blog post -->
@@ -25,6 +26,7 @@
         document.getElementById("user").value = name;
     </script>
 
+</div>
 {% else%}
 
 You must be logged in to use this feature!
