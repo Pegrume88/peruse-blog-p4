@@ -24,9 +24,9 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = True
 
 # Add Render.com URL to allowed hosts
-RENDER_EXTERNAL_HOSTNAME = os.environ.get('https://peruse-p4-blog.onrender.com')
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('peruse-p4-blog.onrender.com')
 if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(peruse-p4-blog.onrender.com)
+    ALLOWED_HOSTS.append('peruse-p4-blog.onrender.com')
 
 
 # Application definition
