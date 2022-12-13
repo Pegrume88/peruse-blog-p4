@@ -11,7 +11,7 @@
             {% for post in post_list %}
                 <div class="col-md-4">
                     <div class="card mb-4">
-                        <div class="card-body">
+                        <div class="card-body rounded">
                             <div class="image-container">
                                 {% if "placeholder" in post.featured_image.url %}
                                 <img src="https://images.pexels.com/photos/842548/pexels-photo-842548.jpeg?auto=compress&cs=tinysrgb&w=800" width="100%">
@@ -19,10 +19,12 @@
                                 <img src="{{ post.featured_image.url }}" width="100%">
                                 {% endif %}
                             </div>
-                            <a href="{% url 'post_detail' post.slug %}" class="post-link">
-                                <h2 class="post-title">{{ post.title }}</h2>
-                                <h2 class="post-title"><a href="{% url 'category_view' post.category.pk %}">{{ post.category }}</a>
-                                </h2>
+                            <a href="{% url 'post_detail' post.slug %}">
+                                <h3 class="post-title">Title: {{ post.title }}</h3>
+                                <h3 class="post-category"><a href="{% url 'category_view' post.category.pk %}">Category: {{ post.category }}
+                            
+                            </a>
+                                </h3>
                                 <div class="image-flash">
                                     <p class="author">By: {{ post.author }} </p>
                                 </div>

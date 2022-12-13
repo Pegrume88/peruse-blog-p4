@@ -85,6 +85,7 @@
 
                     {% endif %}
                 </ul>
+                {% if user.is_authenticated%}
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item dropdown">
@@ -117,10 +118,11 @@
 
 
 
-                </ul>
+                </div>
+                {% endif %}
             </div>
         </div>
-        </div>
+    
     </nav>
     <!--Page content-->
     <main class="flex-shrink-0 main-bg">
@@ -138,18 +140,18 @@
                     <use xlink:href="#bootstrap"></use>
                 </svg>
             </a>
-            <span class="mb-3 mb-md-0 text-muted">© 2022 Company, Inc</span>
+            <span class="mb-3 mb-md-0 text-muted">© 2022 Peruse, Inc</span>
         </div>
 
         <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
             <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
-                        <use xlink:href="#twitter"></use>
+                        <use xlink:href="#twitter">twitter</use>
                     </svg></a></li>
             <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
-                        <use xlink:href="#instagram"></use>
+                        <use xlink:href="#instagram">instagram</use>
                     </svg></a></li>
             <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
-                        <use xlink:href="#facebook"></use>
+                        <use xlink:href="#facebook">facebook</use>
                     </svg></a></li>
         </ul>
     </footer>

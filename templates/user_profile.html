@@ -4,9 +4,11 @@
 
 
 
-<h1>User Profile...</h1>
-{{ users_page }}
-<div class="container-fluid">
+
+
+<div class="container-fluid profile">
+    <h1>User Profile...</h1>
+    <p class="user-name">{{ users_page }}</p>
     <div class="card" style="width: 18rem;">
         {% if users_page.profile_pic %}
         <img class="card-img-top" src=" {{ users_page.profile_image.url }}">
@@ -36,7 +38,7 @@
 
 
             </p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+           
         </div>
     </div>
 </div>

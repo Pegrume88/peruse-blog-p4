@@ -5,12 +5,6 @@ body {
 }
 
 
-
-
-
-
-
-
 button.btn-like {
     border: none;
     color: green;
@@ -22,16 +16,14 @@ button.btn-like {
     color: brown;
 }
 
-.card {
-    border: none;
-    
-}
+
 
 .image-container {
     position: relative;
 }
 
 .author {
+    margin-right: 5%;
     color: darkgray;
     margin: 4px;
     text-transform: uppercase;
@@ -70,9 +62,9 @@ a {
 }
 
 .post-title {
-    color: cadetblue;
-    margin-top: 5%;
     margin-left: 5%;
+    margin-top: 5%;
+   
 }
 
 .post-subtitle {
@@ -90,4 +82,20 @@ a {
     color: #E84610;
     background: transparent;
     border: none;
+}
+
+.post-category {
+    margin-left: 5%;
+    color: #445261;
+}
+
+.create-post{
+    text-align: center;
+    color: darkslategrey;
+}
+
+.profile {
+    align-items: center;
+    margin-left: 35%;
+    margin-right: 35%;
 }

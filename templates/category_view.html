@@ -17,13 +17,19 @@
                 <div class="col-md-4">
                     <div class="card mb-4">
                         <div class="card-body">
-                            
+                            <div class="image-container">
+                                {% if "placeholder" in post.featured_image.url %}
+                                <img src="https://images.pexels.com/photos/842548/pexels-photo-842548.jpeg?auto=compress&cs=tinysrgb&w=800" width="100%">
+                                {% else %}
+                                <img src="{{ post.featured_image.url }}" width="100%">
+                                {% endif %}
+                            </div>
                             <a href="{% url 'post_detail' post.slug %}" class="post-link">
-                                <h2 class="post-title">{{ post.title }}</h2>
-                                <h2 class="post-title"><a href="">{{ post.category }}</a>
+                                <h2 class="post-title">Title: {{ post.title }}</h2>
+                                <h2 class="post-categogry"><a href="">Category: {{ post.category }}</a>
                                 </h2>
-                                <div class="image-flash">
-                                    <p class="author">By: {{ post.author }} </p>
+                                <div>
+                                    <p class="author"> By: {{ post.author }} </p>
                                 </div>
 
                             </a>

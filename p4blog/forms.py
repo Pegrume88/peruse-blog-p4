@@ -5,9 +5,8 @@ from django import forms
 from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 
 
-
-
 class NewSignUpForm(UserCreationForm):
+
     first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
 
@@ -63,7 +62,6 @@ class ChangePasswordForm(PasswordChangeForm):
     class Meta:
         model = User
         fields = ('old_password', 'new_password1', 'new_password2')
-
 
 
 class CommentForm(forms.ModelForm):

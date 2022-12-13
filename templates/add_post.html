@@ -4,18 +4,19 @@
 {% block content %}
 <div class="container-fluid">
 
-    <h1>Add blog post</h1>
+    <h1 class="create-post">Create Your Blog Post</h1>
 
 
     {% if user.is_authenticated %}
-    <br /><br />
+    <br>
+    <br>
     <div class="form-group form">
 
         <form method="POST">
 
             {% csrf_token %}
             {{ form.as_p }}
-            <button>Post!</button>
+            <button class="btn btn-success">Post!</button>
         </form>
 
     </div>
