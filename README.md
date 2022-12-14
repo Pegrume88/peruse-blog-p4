@@ -159,6 +159,11 @@ I ran the JS through JShint with errors.
 
 ## LightHouse
 
+![LightHouse](/static/image/lighthouse.png)
+
+The light house test didnt show the best results for porformance. In fact it was extremely poor. I tried to improve the result but i didnt see much of an improvement. With more time i possibly could get this score up to a respectable level.
+
+There rest of the scores are respectable but but other than best practices they could all be improved.
 
 # Technologies Used
 
