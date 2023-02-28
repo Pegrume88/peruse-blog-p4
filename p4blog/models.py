@@ -68,15 +68,15 @@ class Comment(models.Model):
     def __str__(self):
         return f"comment{self.body} by {self.name}"
 
+
 # Profile page model 
 class Profile(models.Model):
-    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField()
     profile_image = CloudinaryField('image', default='placeholder', null=True, blank=True)
     facebook_url = models.CharField(max_length=250, null=True, blank=True)
     instagram_url = models.CharField(max_length=250, null=True, blank=True)
     twitter_url = models.CharField(max_length=250, null=True, blank=True)
-
    
     def __str__(self):
         return str(self.user)
@@ -84,11 +84,9 @@ class Profile(models.Model):
     def get_absolute_url(self):
         return reverse('home')
 
+    # creates user profile when user registers 
+    def create_profile(instance, created, **kwargs): 
+        if created: 
+            Profile.objects.create(user=instance) 
 
-# creates user profile when user registers 
-def create_profile(instance, created, **kwargs): 
-    if created: 
-        Profile.objects.create(user=instance) 
-
-
-post_save.connect(create_profile, sender=User)
+    post_save.connect(create_profile, sender=User)

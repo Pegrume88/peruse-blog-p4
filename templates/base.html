@@ -94,17 +94,12 @@
 
                             <ul class="dropdown-menu">
 
-
-                                <li>
-                                    <a class="nav-link" href="{% url 'edit_profile' %}"> Change Settings</a>
-                                </li>
-
                                 <li>
                                     {% if user.profile.id %}
                                     <a class="nav-link" href="{% url 'user_profile' user.profile.id %}">View Profile</a>
 
 
-                                    <a class="nav-link" href="{% url 'create_user_profile' %}">Edit Profile</a>
+                                    <a class="nav-link" href="{% url 'edit_user_profile_page' user.profile.id %}">Edit Profile</a>
                                     {% endif %}
                                 </li>
 

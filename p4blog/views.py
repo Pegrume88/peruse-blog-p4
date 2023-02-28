@@ -4,6 +4,7 @@ from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib.auth.views import PasswordChangeView
+from django.contrib.auth.mixins import UserPassesTestMixin
 from .models import Post, Category, Profile
 from .forms import CommentForm, PostForm, NewSignUpForm, EditProfileForm, ChangePasswordForm, ProfileForm
 from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
@@ -33,11 +34,21 @@ class ProfilePageView(generic.DetailView):
         return context
 
 
-class EditProfilePageView(generic.UpdateView):
+class EditProfilePageView(UserPassesTestMixin, generic.UpdateView):
     model = Profile
+    form_class = EditProfileForm
     template_name = 'edit_user_profile_page.html'
-    fields = ['bio', 'profile_image', 'facebook_url', 'instagram_url', 'twitter_url']
     success_url = reverse_lazy('home')
+    
+    def test_func(self):
+        obj = self.get_object()
+        return obj.user == self.request.user
+    
+    def handle_no_permission(self):
+        messages .error(self.request, 'this is not your profile')
+        return HttpResponseRedirect(reverse('home'))
+    # def get_object(self):
+        # return self.request.user
 
 
 
@@ -51,17 +62,6 @@ class PostLike(View):
             post.likes.add(request.user)
 
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
-
-
-
-
-class EditProfileView(generic.UpdateView):
-    form_class = EditProfileForm
-    template_name = 'edit_profile.html'
-    success_url = reverse_lazy('home')
-
-    def get_object(self):
-        return self.request.user
 
 
 class ChangePasswordView(PasswordChangeView):

@@ -10,12 +10,9 @@ ACCOUNT_FORMS = {
 }
 
 
-
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
-
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -26,7 +23,8 @@ DEBUG = False
 # Add Render.com URL to allowed hosts
 # Add Render.com URL to allowed hosts
 
-ALLOWED_HOSTS = ['peruse-p4-blog.onrender.com']
+ALLOWED_HOSTS = ['peruse-p4-blog.onrender.com',
+                 'localhost',]
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
@@ -95,17 +93,19 @@ WSGI_APPLICATION = 'peruse.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-#DATABASES = {
-    #'default': {
-    #   'ENGINE': 'django.db.backends.sqlite3',
-       #    'NAME': BASE_DIR / 'db.sqlite3',
-       # }
-# }
 
-DATABASES = {
-    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
- }
+if os.environ.get("DATABASE_URL"):
+    DATABASES = {
+        "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    }
 
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

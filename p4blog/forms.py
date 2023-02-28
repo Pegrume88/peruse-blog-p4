@@ -28,8 +28,9 @@ class ProfileForm(forms.ModelForm):
     class Meta:
 
         model = Profile
-        fields = ('bio', 'profile_image', 'facebook_url', 'instagram_url', 'twitter_url')
+        fields = ('user', 'bio', 'profile_image', 'facebook_url', 'instagram_url', 'twitter_url', )
         widgets = {
+            'user': forms.TextInput(attrs={'class': 'form-control'}),
             'facebook_url': forms.TextInput(attrs={'class': 'form-control'}),
             'instagram_url': forms.TextInput(attrs={'class': 'form-control'}),
             'twitter_url': forms.TextInput(attrs={'class': 'form-control'}),
@@ -40,20 +41,21 @@ class ProfileForm(forms.ModelForm):
 
 
 class EditProfileForm(UserChangeForm):
-    
+   
     class Meta:
-        model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password')
 
-    def __init__(self, *args, **kwargs):
-        super(EditProfileForm, self).__init__(*args, **kwargs)
+        model = Profile
+        fields = ('bio', 'profile_image', 'facebook_url', 'instagram_url', 'twitter_url', )
+        widgets = {
+            'user': forms.TextInput(attrs={'class': 'form-control'}),
+            'facebook_url': forms.TextInput(attrs={'class': 'form-control'}),
+            'instagram_url': forms.TextInput(attrs={'class': 'form-control'}),
+            'twitter_url': forms.TextInput(attrs={'class': 'form-control'}),
+            'bio': forms.Textarea(attrs={'class': 'form-control'}),
+            'profile_image': forms.FileInput(attrs={'class': 'form-control-file'}),
 
-        self.fields['username'].widget.attrs['class'] = 'form-control'
-        self.fields['email'].widget.attrs['class'] = 'form-control'
-        self.fields['first_name'].widget.attrs['class'] = 'form-control'
-        self.fields['last_name'].widget.attrs['class'] = 'form-control'
-        self.fields['password'].widget.attrs['class'] = 'form-control'
-
+        }
+        
 class ChangePasswordForm(PasswordChangeForm):
     old_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'type':'password'}))
     new_password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'type':'password'}))

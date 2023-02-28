@@ -6,31 +6,30 @@
 
 <h1>Edit your Profile</h1>
 {% if user.is_authenticated %}
-    {% if user.id == profile.user.id %}
         <br /><br />
-        <div class="form">
-            <div class="form-group">
-                <form method="POST">
+        <div class="row">
+            <div class="col-md-8 mt-3 offset-md-2">
+                <form class="form-group" method="POST">
 
                     {% csrf_token %}
                     {{ form.as_p }}
-                    <button>Update Profile</button>
+                    <button type="" >Update Profile</button>
                 </form>
             </div>
         </div>
 
-        <!--Js to automatically assign correct auther  -->
+        <!--Js to automatically assign correct user -->
+
         <script>
             var name = "{{ user.id }}";
             document.getElementById("user").value = name;
         </script>
     {% else %}
         You are not the correct user to edit this profile
-    {% endif %}   
+    
 
-{% else%}
-    You must be logged in to use this feature!
 
+        
 {% endif %}
 
 {% endblock %}

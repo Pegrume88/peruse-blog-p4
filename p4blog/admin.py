@@ -6,6 +6,7 @@ from django_summernote.admin import SummernoteModelAdmin
 admin.site.register(Profile)
 
 
+
 @admin.register(Post)
 class PostAdmin(SummernoteModelAdmin):
 
